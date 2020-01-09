@@ -8,7 +8,7 @@
   <packaging>pom</packaging>
 
 
-  <name>thoughtmechanix-parent-pom</name>
+  <name>Thought Mechanix Parent</name>
   <description>Parent Pom for the thoughtmechanix project</description>
 
   <parent>

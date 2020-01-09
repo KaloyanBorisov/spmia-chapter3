@@ -4,16 +4,14 @@ import com.thoughtmechanix.licenses.model.License;
 import com.thoughtmechanix.licenses.services.LicenseService;
 import com.thoughtmechanix.licenses.config.ServiceConfig;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.ResponseStatus;
 
 import java.util.List;
 
+@RefreshScope
 @RestController
 @RequestMapping(value="v1/organizations/{organizationId}/licenses")
 public class LicenseServiceController {
@@ -22,6 +20,14 @@ public class LicenseServiceController {
 
     @Autowired
     private ServiceConfig serviceConfig;
+
+    @Value("${message:Hello default}")
+    private String message;
+
+    @GetMapping("/message")
+    String getMessage() {
+        return this.message;
+    }
 
     @RequestMapping(value="/",method = RequestMethod.GET)
     public List<License> getLicenses( @PathVariable("organizationId") String organizationId) {
